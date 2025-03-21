@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banarasi Sarees</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <h1>Our Exclusive Banarasi Sarees Collection</h1>
+
+    <div class="saree-container">
+        <div class="saree-item" >
+            <img src="images\banarasiimg1.jpeg" alt="Banarasi Saree 1">
+            <p><strong>Royal Red Banarasi Saree</strong></p>
+            <p>Exquisite handwoven Banarasi silk saree with golden zari work.</p>
+            <p>Price: ₹7,599</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images\banarasiimg2.jpeg" alt="Banarasi Saree 2">
+            <p><strong>Blue Banarasi Brocade Saree</strong></p>
+            <p>Stunning blue Banarasi saree with intricate brocade patterns.</p>
+            <p>Price: ₹7,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images\banarasiimg3.jpeg" alt="Banarasi Saree 3">
+            <p><strong>Green Banarasi Silk Saree</strong></p>
+            <p>Graceful green Banarasi silk saree with traditional motifs.</p>
+            <p>Price: ₹8,499</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images\banarasiimg4.jpeg" alt="Banarasi Saree 4">
+            <p><strong>Pink Banarasi Designer Saree</strong></p>
+            <p>Elegant pink Banarasi saree with a touch of modern design.</p>
+            <p>Price: ₹8,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', (event) => {
+                let item = event.target.parentElement;
+                let itemName = item.querySelector('strong').innerText;
+                let itemPrice = item.querySelectorAll('p')[2].innerText; // Get price text
+                let itemImage = item.querySelector('img').src;
+
+                // Retrieve cart items from localStorage or initialize empty array
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                // Add the selected item to the cart
+                cart.push({ name: itemName, price: itemPrice, image: itemImage });
+
+                // Store updated cart back to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                alert('Item added to cart!');
+            });
+        });
+    </script>
+
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    nav {
+        background-color: #ff9800;
+        padding: 15px;
+    }
+
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline;
+        margin-right: 15px;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .saree-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .saree-item {
+        width: 45%;
+        text-align: center;
+        border: 1px solid #ddd;
+        padding: 15px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .saree-item img {
+        width: auto;
+        height: 200px;
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    .add-to-cart {
+        background-color: #ff4081;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .add-to-cart:hover {
+        background-color: #e91e63;
+    }
+
+    @media (max-width: 768px) {
+        .saree-item {
+            width: 90%;
+        }
+    }
+</style>
+</body>
+</html>

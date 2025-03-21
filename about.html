@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Your Cart</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <h1>Your Shopping Cart</h1>
+    <h2>Items in Your Cart</h2>
+    <div id="cart-container">
+        <p>No items in cart.</p>
+    </div>
+
+    <button id="clear-cart">Clear Cart</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartContainer = document.getElementById('cart-container');
+    
+            function renderCart() {
+                if (cart.length === 0) {
+                    cartContainer.innerHTML = "<p>No items in cart.</p>";
+                } else {
+                    cartContainer.innerHTML = ""; // Clear the default message
+                    cart.forEach((item, index) => {
+                        let cartItem = document.createElement('div');
+                        cartItem.classList.add('cart-item');
+                        cartItem.innerHTML = `
+                            <img src="${item.image}" alt="${item.name}" width="100">
+                            <p><strong>${item.name}</strong></p>
+                            <p>${item.price}</p>
+                            <button class="remove-item" data-index="${index}">Remove</button>
+                        `;
+                        cartContainer.appendChild(cartItem);
+                    });
+    
+                    // Add event listeners to remove buttons
+                    document.querySelectorAll('.remove-item').forEach(button => {
+                        button.addEventListener('click', (event) => {
+                            let index = event.target.getAttribute('data-index');
+                            cart.splice(index, 1);
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            renderCart();
+                        });
+                    });
+                }
+            }
+    
+            // Render the cart initially
+            renderCart();
+    
+            document.getElementById('clear-cart').addEventListener('click', () => {
+                localStorage.removeItem('cart');
+                cart = []; // Reset the cart array
+                renderCart(); // Re-render the cart
+            });
+        });
+    </script>
+    
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #e91e63;
+            padding: 15px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #cart-container {
+            padding: 20px;
+        }
+
+        .cart-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        #clear-cart {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #clear-cart:hover {
+            background-color: #e91e63;
+        }
+    </style>
+
+</body>
+</html>

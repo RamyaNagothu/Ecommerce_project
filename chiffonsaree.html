@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiffon Saree Collections</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="chiffonsaree.html">Home</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <h1>Our Exclusive Chiffon Saree Collections</h1>
+
+    <div class="saree-container">
+        <div class="saree-item">
+            <img src="images\chiffonimg1.jpeg" alt="Red Chiffon Saree">
+            <p><strong>Elegant Red Chiffon Saree</strong></p>
+            <p>Lightweight and flowy red chiffon saree with golden embroidery.</p>
+            <p>Price: ₹3,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images\chiffonimg2.jpeg" alt="Blue Chiffon Saree">
+            <p><strong>Royal Blue Chiffon Saree</strong></p>
+            <p>Graceful blue chiffon saree with silver border.</p>
+            <p>Price: ₹4,499</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images\chiffonimg3.jpeg" alt="Green Chiffon Saree">
+            <p><strong>Green Designer Chiffon Saree</strong></p>
+            <p>Stylish green chiffon saree with floral prints.</p>
+            <p>Price: ₹4,799</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images\chiffonimg4.jpeg" alt="Pink Chiffon Saree">
+            <p><strong>Pink Embellished Chiffon Saree</strong></p>
+            <p>Beautiful pink chiffon saree with sparkling sequins.</p>
+            <p>Price: ₹5,199</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images\chiffonimg5.jpeg" alt="Golden Chiffon Saree">
+            <p><strong>Golden Fancy Chiffon Saree</strong></p>
+            <p>Elegant golden chiffon saree with delicate embroidery.</p>
+            <p>Price: ₹5,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Item added to cart!');
+            });
+        });
+    </script>
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #ff9800;
+            padding: 15px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .saree-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .saree-item {
+            width: 45%;
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .saree-item img {
+            width: auto;
+            height: 200px;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .add-to-cart {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+
+        .add-to-cart:hover {
+            background-color: #e91e63;
+        }
+
+
+        @media (max-width: 768px) {
+            .saree-item {
+                width: 90%;
+            }
+        }
+    </style>
+</body>
+</html>

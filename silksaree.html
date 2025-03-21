@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saree Collections</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <h1>Our Exclusive Silk Saree Collections</h1>
+
+    <div class="saree-container">
+        <div class="saree-item">
+            <img src="images/redsilksaree.jpeg" alt="Red Silk Saree">
+            <p><strong>Elegant Red Silk Saree</strong></p>
+            <p>Beautiful handwoven red silk saree with golden border.</p>
+            <p>Price: ₹5,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images/bluesilksaree.jpeg" alt="Blue Silk Saree">
+            <p><strong>Royal Blue Silk Saree</strong></p>
+            <p>Premium quality blue silk saree with traditional motifs.</p>
+            <p>Price: ₹6,499</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images/greensilksaree.jpeg" alt="Green Silk Saree">
+            <p><strong>Green Zari Work Silk Saree</strong></p>
+            <p>Stunning green silk saree with intricate zari embroidery.</p>
+            <p>Price: ₹7,299</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="saree-item">
+            <img src="images/pinksilksaree.jpeg" alt="Pink Silk Saree">
+            <p><strong>Pink Designer Silk Saree</strong></p>
+            <p>Designer pink silk saree with stone embellishments.</p>
+            <p>Price: ₹8,199</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images/goldensilksaree.jpeg" alt="Golden Silk Saree">
+            <p><strong>Golden Wedding Silk Saree</strong></p>
+            <p>Luxurious golden silk saree, perfect for weddings.</p>
+            <p>Price: ₹9,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="saree-item">
+            <img src="images/darkbluecoppersilksaree.jpeg" alt="Dark Blue Copper Silk Saree">
+            <p><strong>Dark Blue Copper Silk Saree</strong></p>
+            <p>Rich dark blue silk saree with elegant copper embroidery.</p>
+            <p>Price: ₹9,999</p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', (event) => {
+                let item = event.target.parentElement;
+                let itemName = item.querySelector('strong').innerText;
+                let itemPrice = item.querySelectorAll('p')[2].innerText; // Get price text
+                let itemImage = item.querySelector('img').src;
+
+                // Retrieve cart items from localStorage or initialize empty array
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                // Add the selected item to the cart
+                cart.push({ name: itemName, price: itemPrice, image: itemImage });
+
+                // Store updated cart back to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                alert('Item added to cart!');
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #e91e63;
+            padding: 15px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .saree-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .saree-item {
+            width: 30%;
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .saree-item img {
+            width: auto;
+            height: 200px;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .add-to-cart {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #e91e63;
+        }
+    </style>
+
+</body>
+</html>

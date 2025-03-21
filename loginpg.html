@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saree Shopping</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #ff5733;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #e64a19;
+        }
+
+        p {
+            margin-top: 10px;
+        }
+
+        a {
+            color: #ff5733;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Signup Page -->
+    <div class="container" id="signupPage">
+        <h2>Sign Up</h2>
+        <form id="signupForm" onsubmit="return registerUser()">
+            <label for="newUsername">Username:</label>
+            <input type="text" id="newUsername" required>
+
+            <label for="newPassword">Password:</label>
+            <input type="password" id="newPassword" required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="#" onclick="showLoginPage()">Login</a></p>
+    </div>
+
+    <!-- Login Page -->
+    <div class="container" id="loginPage" style="display: none;">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="return validateLogin()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="#" onclick="showSignupPage()">Sign up</a></p>
+    </div>
+
+    <!-- Details Page -->
+    <div class="container" id="detailsPage" style="display: none;">
+        <h2>Enter Your Details</h2>
+        <form id="detailsForm" onsubmit="return saveDetails()">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" required></textarea>
+
+            <label for="pincode">Pincode:</label>
+            <input type="text" id="pincode" required pattern="[0-9]{6}" title="Enter a valid 6-digit pincode">
+
+            <button type="submit">Save & Continue</button>
+        </form>
+    </div>
+
+    <!-- Home Page -->
+    <div class="container" id="homePage" style="display: none;">
+        <h2>Welcome to Saree Shopping</h2>
+        <p id="userInfo"></p>
+        <button onclick="showDetailsPage()">Enter Details</button>
+        <button onclick="logout()">Logout</button>
+        <button onclick="goToIndex()">Home</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("Page loaded. Checking login status...");
+
+            if (localStorage.getItem("loggedIn") === "true") {
+                if (localStorage.getItem("user_name")) {
+                    showHomePage();
+                } else {
+                    showDetailsPage();
+                }
+            } else {
+                showSignupPage();
+            }
+        });
+
+        function registerUser() {
+            var newUsername = document.getElementById("newUsername").value;
+            var newPassword = document.getElementById("newPassword").value;
+
+            localStorage.setItem("username", newUsername);
+            localStorage.setItem("password", newPassword);
+
+            alert("Signup successful! Please log in.");
+            showLoginPage();
+            return false;
+        }
+
+        function validateLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            var storedUsername = localStorage.getItem("username");
+            var storedPassword = localStorage.getItem("password");
+
+            if (username === storedUsername && password === storedPassword) {
+                alert("Login successful!");
+                localStorage.setItem("loggedIn", "true");
+                showDetailsPage();
+                return false;
+            } else {
+                alert("Invalid credentials. Please try again.");
+                return false;
+            }
+        }
+
+        function saveDetails() {
+            var name = document.getElementById("name").value;
+            var address = document.getElementById("address").value;
+            var pincode = document.getElementById("pincode").value;
+
+            localStorage.setItem("user_name", name);
+            localStorage.setItem("user_address", address);
+            localStorage.setItem("user_pincode", pincode);
+
+            alert("Details saved successfully!");
+            showHomePage();
+            return false;
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("user_name");
+            localStorage.removeItem("user_address");
+            localStorage.removeItem("user_pincode");
+            alert("Logged out successfully!");
+            showSignupPage();
+        }
+
+        function showSignupPage() {
+            document.getElementById("signupPage").style.display = "block";
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("detailsPage").style.display = "none";
+            document.getElementById("homePage").style.display = "none";
+        }
+
+        function showLoginPage() {
+            document.getElementById("signupPage").style.display = "none";
+            document.getElementById("loginPage").style.display = "block";
+            document.getElementById("detailsPage").style.display = "none";
+            document.getElementById("homePage").style.display = "none";
+        }
+
+        function showDetailsPage() {
+            document.getElementById("signupPage").style.display = "none";
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("detailsPage").style.display = "block";
+            document.getElementById("homePage").style.display = "none";
+        }
+
+        function showHomePage() {
+            document.getElementById("signupPage").style.display = "none";
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("detailsPage").style.display = "none";
+            document.getElementById("homePage").style.display = "block";
+
+            var name = localStorage.getItem("user_name");
+            var address = localStorage.getItem("user_address");
+            var pincode = localStorage.getItem("user_pincode");
+
+            document.getElementById("userInfo").innerHTML = 
+                `Hello, <b>${name}</b>!<br>Address: ${address}<br>Pincode: ${pincode}`;
+        }
+
+        function goToIndex() {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+</html>

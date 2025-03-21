@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saree Shopping</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="loginpg.html">Login</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#collections">Collections</a></li>
+            
+           <!-- <li><a href="#" onclick="showContact()">Contact</a></li> -->
+            <li><a href="about.html">🛒</a></li>
+        </ul>
+        
+    </nav>
+    <h1 class="nav-title">Welcome to Saree Shopping</h1>
+    <!-- Homepage with Saree Logo -->
+    <header id="home">
+        <div class="logo-container">
+            <img src="images\wallpaper.png" alt="Saree Logo" class="saree-logo">
+        </div>
+    </header>
+
+    <!-- Collections Section -->
+    <section id="collections">
+        <h2>Our Saree Collections</h2>
+        <ul>
+            <li><a href="silksaree.html">Silk Sarees</a></li>
+            <li><a href="banarasisaree.html">Banarasi Sarees</a></li>
+            <li><a href="chiffonsaree.html">Chiffon Sarees</a></li>
+            <li><a href="georgettesaree.html">Georgette Sarees</a></li>
+            <li><a href="kanjeevaramsaree.html">Kanjeevaram Sarees</a></li>
+        </ul>
+    </section>
+
+    <!-- Contact Section (Initially Hidden) -->
+    <section id="contact" style="display: none;">
+        <h2>Contact</h2>
+        <p>Contact me if you want to purchase.</p>
+        <p>📞 Contact Number: 1234456789</p>
+    </section>
+
+    <script>
+        function showContact() {
+            document.getElementById("contact").style.display = "block";
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        nav {
+            background-color: rgb(195, 13, 152);
+            padding: 15px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .saree-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .saree-item {
+            width: 45%;
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .saree-item img {
+            width: auto;
+            height: 200px;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+       
+        @media (max-width: 768px) {
+            .saree-item {
+                width: 90%;
+            }
+        }
+    </style>
+</body>
+</html>
+
+
