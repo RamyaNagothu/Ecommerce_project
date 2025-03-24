@@ -83,11 +83,19 @@
         }
 
         .saree-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    
+    /* Wallpaper Background */
+    background-image: url('images\wallpaper.png'); /* Replace with actual image URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 100vh; /* Ensure it covers full screen */
         }
 
         .saree-item {
@@ -107,12 +115,13 @@
             border-radius: 8px;
         }
 
-       
-        @media (max-width: 768px) {
-            .saree-item {
-                width: 90%;
-            }
-        }
+       @media (max-width: 768px) {
+                .saree-container {
+                background-size: contain; /* Ensures image fits without cropping */
+                min-height: auto; /* Adjust height for smaller screens */
+                padding: 10px;
+    }
+}
     </style>
 </body>
 </html>
