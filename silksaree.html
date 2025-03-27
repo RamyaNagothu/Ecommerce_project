@@ -142,9 +142,11 @@
 
         .saree-item img {
             width: auto;
-            height: 200px;
+            height: 100px;
             max-width: 100%;
             border-radius: 8px;
+            max-width: 100%; /* Ensures responsiveness */
+            object-fit: cover;
         }
 
         .add-to-cart {
@@ -160,6 +162,11 @@
         .add-to-cart:hover {
             background-color: #e91e63;
         }
+      @media (max-width: 768px) {
+    .saree-item img {
+        max-height: 200px; /* Reduce height on smaller screens */
+    }
+}  
     </style>
 
 </body>
