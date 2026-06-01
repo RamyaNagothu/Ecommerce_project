@@ -12,8 +12,8 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="collections.html">Collections</a></li>
-            <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">Cart</a></li>
         </ul>
     </nav>
 
@@ -21,50 +21,102 @@
 
     <div class="saree-container">
         <div class="saree-item">
-            <img src="images\chiffonimg1.jpeg" alt="Red Chiffon Saree">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
+            <img src="images/chiffonimg1.jpeg" alt="Red Chiffon Saree">
+            </div>
             <p><strong>Elegant Red Chiffon Saree</strong></p>
             <p>Lightweight and flowy red chiffon saree with golden embroidery.</p>
-            <p>Price: ₹3,999</p>
+             <div class="price-section">
+                <span class="original-price">₹3,999</span>
+                <span class="final-price">₹2,999</span>
+                <span class="discount">10% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
-            <img src="images\chiffonimg2.jpeg" alt="Blue Chiffon Saree">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
+            <img src="images/chiffonimg2.jpeg" alt="Blue Chiffon Saree">
+            </div>
             <p><strong>Royal Blue Chiffon Saree</strong></p>
             <p>Graceful blue chiffon saree with silver border.</p>
-            <p>Price: ₹4,499</p>
+            <div class="price-section">
+                <span class="original-price">₹4,999</span>
+                <span class="final-price">₹2,999</span>
+                <span class="discount">20% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
-            <img src="images\chiffonimg3.jpeg" alt="Green Chiffon Saree">
+             <div class="image-container">
+                <span class="wishlist">♥</span>
+            <img src="images/chiffonimg3.jpeg" alt="Green Chiffon Saree">
+            </div>
             <p><strong>Green Designer Chiffon Saree</strong></p>
             <p>Stylish green chiffon saree with floral prints.</p>
-            <p>Price: ₹4,799</p>
+             <div class="price-section">
+                <span class="original-price">₹4,799</span>
+                <span class="final-price">₹3,599</span>
+                <span class="discount">25% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
-            <img src="images\chiffonimg4.jpeg" alt="Pink Chiffon Saree">
+        <div class="image-container">
+                <span class="wishlist">♥</span>
+            <img src="images/chiffonimg4.jpeg" alt="Pink Chiffon Saree">
+            </div>
             <p><strong>Pink Embellished Chiffon Saree</strong></p>
             <p>Beautiful pink chiffon saree with sparkling sequins.</p>
-            <p>Price: ₹5,199</p>
+             <div class="price-section">
+                <span class="original-price">₹5,199</span>
+                <span class="final-price">₹4,199</span>
+                <span class="discount">10% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
-            <img src="images\chiffonimg5.jpeg" alt="Golden Chiffon Saree">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
+            <img src="images/chiffonimg5.jpeg" alt="Golden Chiffon Saree">
+            </div>
             <p><strong>Golden Fancy Chiffon Saree</strong></p>
             <p>Elegant golden chiffon saree with delicate embroidery.</p>
-            <p>Price: ₹5,999</p>
+            <div class="price-section">
+                <span class="original-price">₹5,999</span>
+                <span class="final-price">₹3,199</span>
+                <span class="discount">15% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
     </div>
 
-    <script>
+   <script>
         document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (event) => {
+                const item = event.target.closest('.saree-item');
+                const name = item.querySelector('strong').innerText;
+                const price = item.querySelector('.final-price').innerText;
+                const image = item.querySelector('img').src;
+
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push({ name, price, image });
+                localStorage.setItem('cart', JSON.stringify(cart));
+
                 alert('Item added to cart!');
+            });
+        });
+
+        // Wishlist toggle
+        document.querySelectorAll('.wishlist').forEach(heart => {
+            heart.addEventListener('click', () => {
+                heart.classList.toggle('active');
+                alert(heart.classList.contains('active') ? 'Added to Wishlist' : 'Removed from Wishlist');
             });
         });
     </script>
@@ -110,49 +162,100 @@
         }
 
         .saree-item {
-            width: 45%;
-            text-align: center;
-            border: 1px solid #ddd;
-            padding: 15px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .saree-item img {
-            width: auto;
-            height: 100px;
-            max-width: 100%;
-            border-radius: 8px;
-            object-fit: cover;
-            max-height: 250px;
-        }
-
-        .add-to-cart {
-            background-color: #ff4081;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            margin-top: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+        width: 45%;
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+       }
 
 
-        .add-to-cart:hover {
-            background-color: #e91e63;
-        }
-
-         @media (max-width: 768px) {
-    .saree-item img {
-        max-height: 200px; /* Reduce height on smaller screens */
-    }
+.image-container {
+    position: relative;
 }
-        @media (max-width: 768px) {
-            .saree-item {
-                width: 90%;
-            }
-        }
+
+.image-container img {
+    width: auto;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.wishlist {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: 24px;
+    color: #bdbdbd;
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+}
+
+.wishlist.active {
+    color: red;
+}
+
+
+.color {
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.price-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px 0;
+}
+
+.final-price {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 18px;
+}
+
+.discount {
+    color: green;
+    font-weight: bold;
+}
+
+.add-to-cart {
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-to-cart:hover {
+    background-color: #e91e63;
+}
+
+@media (max-width: 768px) {
+    .saree-item {
+        width: 90%;
+    }
+
+    .saree-item img {
+        width: 200px;
+        height: 280px;
+    }
+
+}
     </style>
 </body>
 </html>
