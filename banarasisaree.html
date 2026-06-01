@@ -11,8 +11,8 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="collections.html">Collections</a></li>
-            <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">Cart</a></li>
         </ul>
     </nav>
 
@@ -20,34 +20,62 @@
 
     <div class="saree-container">
         <div class="saree-item" >
-            <img src="images\banarasiimg1.jpeg" alt="Banarasi Saree 1">
+             <div class="image-container">
+                <span class="wishlist">♥</span>
+            <img src="images/banarasiimg1.jpeg" alt="Banarasi Saree 1">
+            </div>
             <p><strong>Royal Red Banarasi Saree</strong></p>
             <p>Exquisite handwoven Banarasi silk saree with golden zari work.</p>
-            <p>Price: ₹7,599</p>
+             <div class="price-section">
+                <span class="original-price">₹7,599</span>
+                <span class="final-price">₹5,999</span>
+                <span class="discount">15% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
-            <img src="images\banarasiimg2.jpeg" alt="Banarasi Saree 2">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
+            <img src="images/banarasiimg2.jpeg" alt="Banarasi Saree 2">
+            </div>
             <p><strong>Blue Banarasi Brocade Saree</strong></p>
             <p>Stunning blue Banarasi saree with intricate brocade patterns.</p>
-            <p>Price: ₹7,999</p>
+            <div class="price-section">
+                <span class="original-price">₹7,999</span>
+                <span class="final-price">₹6,999</span>
+                <span class="discount">10% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
-            <img src="images\banarasiimg3.jpeg" alt="Banarasi Saree 3">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
+            <img src="images/banarasiimg3.jpeg" alt="Banarasi Saree 3">
+            </div>
             <p><strong>Green Banarasi Silk Saree</strong></p>
             <p>Graceful green Banarasi silk saree with traditional motifs.</p>
-            <p>Price: ₹8,499</p>
+             <div class="price-section">
+                <span class="original-price">₹8,499</span>
+                <span class="final-price">₹7,999</span>
+                <span class="discount">13% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
-            <img src="images\banarasiimg4.jpeg" alt="Banarasi Saree 4">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
+            <img src="images/banarasiimg4.jpeg" alt="Banarasi Saree 4">
+            </div>
             <p><strong>Pink Banarasi Designer Saree</strong></p>
             <p>Elegant pink Banarasi saree with a touch of modern design.</p>
-            <p>Price: ₹8,999</p>
+            <div class="price-section">
+                <span class="original-price">₹8,999</span>
+                <span class="final-price">₹4,999</span>
+                <span class="discount">10% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
     </div>
@@ -55,25 +83,27 @@
     <script>
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', (event) => {
-                let item = event.target.parentElement;
-                let itemName = item.querySelector('strong').innerText;
-                let itemPrice = item.querySelectorAll('p')[2].innerText; // Get price text
-                let itemImage = item.querySelector('img').src;
+                const item = event.target.closest('.saree-item');
+                const name = item.querySelector('strong').innerText;
+                const price = item.querySelector('.final-price').innerText;
+                const image = item.querySelector('img').src;
 
-                // Retrieve cart items from localStorage or initialize empty array
                 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-                // Add the selected item to the cart
-                cart.push({ name: itemName, price: itemPrice, image: itemImage });
-
-                // Store updated cart back to localStorage
+                cart.push({ name, price, image });
                 localStorage.setItem('cart', JSON.stringify(cart));
 
                 alert('Item added to cart!');
             });
         });
-    </script>
 
+        // Wishlist toggle
+        document.querySelectorAll('.wishlist').forEach(heart => {
+            heart.addEventListener('click', () => {
+                heart.classList.toggle('active');
+                alert(heart.classList.contains('active') ? 'Added to Wishlist' : 'Removed from Wishlist');
+            });
+        });
+    </script>
 
 
 <style>
@@ -108,54 +138,105 @@
     }
 
     .saree-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        padding: 20px;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 20px;
+}
 
+.saree-item {
+    width: 45%;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
+.image-container {
+    position: relative;
+}
+
+.image-container img {
+    width: auto;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.wishlist {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: 24px;
+    color: #bdbdbd;
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+}
+
+.wishlist.active {
+    color: red;
+}
+
+
+.color {
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.price-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px 0;
+}
+
+.final-price {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 18px;
+}
+
+.discount {
+    color: green;
+    font-weight: bold;
+}
+
+.add-to-cart {
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-to-cart:hover {
+    background-color: #e91e63;
+}
+
+@media (max-width: 768px) {
     .saree-item {
-        width: 45%;
-        text-align: center;
-        border: 1px solid #ddd;
-        padding: 15px;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 90%;
     }
 
     .saree-item img {
-        width: auto;
-        height: 100px;
-        max-width: 100%;
-        border-radius: 8px;
-        max-height: 250px;
-        object-fit: cover;
-    }
-
-    .add-to-cart {
-        background-color: #ff4081;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        margin-top: 10px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-    .add-to-cart:hover {
-        background-color: #e91e63;
-    }
-
-    @media (max-width: 768px) {
-        .saree-item {
-            width: 90%;
-        }
-    }
-     @media (max-width: 768px) {
-    .saree-item img {
-        max-height: 200px; /* Reduce height on smaller screens */
+        width: 200px;
+        height: 280px;
     }
 }
 </style>
