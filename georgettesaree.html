@@ -11,8 +11,8 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="collections.html">Collections</a></li>
-            <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">Cart</a></li>
         </ul>
     </nav>
 
@@ -20,42 +20,77 @@
 
     <div class="saree-container">
         <div class="saree-item">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/georgetteimg1.jpeg" alt="Georgette Saree 1">
+            </div>
             <p><strong>Royal Red Georgette Saree</strong></p>
             <p>Handwoven red Georgette saree with gold zari work.</p>
-            <p>Price: ₹7,999</p>
+             <div class="price-section">
+                <span class="original-price">₹7,999</span>
+                <span class="final-price">₹5,999</span>
+                <span class="discount">15% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
+              <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/georgetteimg2.jpeg" alt="Georgette Saree 2">
+            </div>
             <p><strong>Elegant Blue Georgette Saree</strong></p>
             <p>Beautiful blue Georgette silk saree with silver borders.</p>
-            <p>Price: ₹8,499</p>
+            <div class="price-section">
+                <span class="original-price">₹8,499</span>
+                <span class="final-price">₹6,999</span>
+                <span class="discount">12% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
+             <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/georgetteimg3.jpeg" alt="Georgette Saree 3">
+            </div>
             <p><strong>Pink Floral Georgette Saree</strong></p>
             <p>Traditional pink Georgette saree with floral motifs.</p>
-            <p>Price: ₹9,299</p>
+             <div class="price-section">
+                <span class="original-price">₹9,299</span>
+                <span class="final-price">₹7,999</span>
+                <span class="discount">21% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/georgetteimg4.jpeg" alt="Georgette Saree 4">
+            </div>
             <p><strong>Golden Georgette Saree</strong></p>
             <p>Luxury golden Georgette saree for special occasions.</p>
-            <p>Price: ₹10,199</p>
+             <div class="price-section">
+                <span class="original-price">₹10,199</span>
+                <span class="final-price">₹6,999</span>
+                <span class="discount">30% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/georgetteimg5.jpeg" alt="Georgette Saree 5">
+            </div>
             <p><strong>Green Zari Georgette Saree</strong></p>
             <p>Rich green Georgette saree with heavy zari weaving.</p>
-            <p>Price: ₹11,499</p>
+            <div class="price-section">
+                <span class="original-price">₹11,499</span>
+                <span class="final-price">₹8,999</span>
+                <span class="discount">25% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
     </div>
@@ -63,25 +98,27 @@
     <script>
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', (event) => {
-                let item = event.target.parentElement;
-                let itemName = item.querySelector('strong').innerText;
-                let itemPrice = item.querySelectorAll('p')[2].innerText; // Get price text
-                let itemImage = item.querySelector('img').src;
+                const item = event.target.closest('.saree-item');
+                const name = item.querySelector('strong').innerText;
+                const price = item.querySelector('.final-price').innerText;
+                const image = item.querySelector('img').src;
 
-                // Retrieve cart items from localStorage or initialize empty array
                 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-                // Add the selected item to the cart
-                cart.push({ name: itemName, price: itemPrice, image: itemImage });
-
-                // Store updated cart back to localStorage
+                cart.push({ name, price, image });
                 localStorage.setItem('cart', JSON.stringify(cart));
 
                 alert('Item added to cart!');
             });
         });
-    </script>
 
+        // Wishlist toggle
+        document.querySelectorAll('.wishlist').forEach(heart => {
+            heart.addEventListener('click', () => {
+                heart.classList.toggle('active');
+                alert(heart.classList.contains('active') ? 'Added to Wishlist' : 'Removed from Wishlist');
+            });
+        });
+    </script>
 
 <style>
     body {
@@ -132,14 +169,64 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .saree-item img {
-        width: auto;
-        height: 200px;
-        max-width: 100%;
-        border-radius: 8px;
-        max-height: 250px;
-        object-fit: cover;
-    }
+   .image-container {
+    position: relative;
+}
+
+.image-container img {
+    width: 30%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.wishlist {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: 24px;
+    color: #bdbdbd;
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+}
+
+.wishlist.active {
+    color: red;
+}
+
+
+.color {
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.price-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px 0;
+}
+
+.final-price {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 18px;
+}
+
+.discount {
+    color: green;
+    font-weight: bold;
+}
 
     .add-to-cart {
         background-color: #ff4081;
@@ -159,6 +246,7 @@
         .saree-item {
             width: 90%;
         }
+        
     }
     @media (max-width: 768px) {
     .saree-item img {
