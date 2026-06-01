@@ -12,8 +12,8 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="collections.html">Collections</a></li>
-            <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">Cart</a></li>
         </ul>
     </nav>
 
@@ -21,72 +21,117 @@
 
     <div class="saree-container">
         <div class="saree-item">
+              <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/redsilksaree.jpeg" alt="Red Silk Saree">
+            </div>
             <p><strong>Elegant Red Silk Saree</strong></p>
             <p>Beautiful handwoven red silk saree with golden border.</p>
-            <p>Price: ₹5,999</p>
+             <div class="price-section">
+                <span class="original-price">₹5,999</span>
+                <span class="final-price">₹3,999</span>
+                <span class="discount">10% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/bluesilksaree.jpeg" alt="Blue Silk Saree">
+            </div>
             <p><strong>Royal Blue Silk Saree</strong></p>
             <p>Premium quality blue silk saree with traditional motifs.</p>
-            <p>Price: ₹6,499</p>
+            <div class="price-section">
+                <span class="original-price">₹6,499</span>
+                <span class="final-price">₹4,299</span>
+                <span class="discount">15% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/greensilksaree.jpeg" alt="Green Silk Saree">
+            </div>
             <p><strong>Green Zari Work Silk Saree</strong></p>
             <p>Stunning green silk saree with intricate zari embroidery.</p>
-            <p>Price: ₹7,299</p>
+            <div class="price-section">
+                <span class="original-price">₹7,499</span>
+                <span class="final-price">₹5,299</span>
+                <span class="discount">13% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
         <div class="saree-item">
+           <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/pinksilksaree.jpeg" alt="Pink Silk Saree">
+            </div>
             <p><strong>Pink Designer Silk Saree</strong></p>
             <p>Designer pink silk saree with stone embellishments.</p>
-            <p>Price: ₹8,199</p>
+            <div class="price-section">
+                <span class="original-price">₹8,199</span>
+                <span class="final-price">₹6,199</span>
+                <span class="discount">16% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
+             <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/goldensilksaree.jpeg" alt="Golden Silk Saree">
+            </div>
             <p><strong>Golden Wedding Silk Saree</strong></p>
             <p>Luxurious golden silk saree, perfect for weddings.</p>
-            <p>Price: ₹9,999</p>
+             <div class="price-section">
+                <span class="original-price">₹9,999</span>
+                <span class="final-price">₹5,999</span>
+                <span class="discount">30% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
             <img src="images/darkbluecoppersilksaree.jpeg" alt="Dark Blue Copper Silk Saree">
+            </div>
             <p><strong>Dark Blue Copper Silk Saree</strong></p>
             <p>Rich dark blue silk saree with elegant copper embroidery.</p>
-            <p>Price: ₹9,999</p>
+            <div class="price-section">
+                <span class="original-price">₹9,999</span>
+                <span class="final-price">₹7,999</span>
+                <span class="discount">20% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
     </div>
 
-    <script>
+   <script>
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', (event) => {
-                let item = event.target.parentElement;
-                let itemName = item.querySelector('strong').innerText;
-                let itemPrice = item.querySelectorAll('p')[2].innerText; // Get price text
-                let itemImage = item.querySelector('img').src;
+                const item = event.target.closest('.saree-item');
+                const name = item.querySelector('strong').innerText;
+                const price = item.querySelector('.final-price').innerText;
+                const image = item.querySelector('img').src;
 
-                // Retrieve cart items from localStorage or initialize empty array
                 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-                // Add the selected item to the cart
-                cart.push({ name: itemName, price: itemPrice, image: itemImage });
-
-                // Store updated cart back to localStorage
+                cart.push({ name, price, image });
                 localStorage.setItem('cart', JSON.stringify(cart));
 
                 alert('Item added to cart!');
+            });
+        });
+
+        // Wishlist toggle
+        document.querySelectorAll('.wishlist').forEach(heart => {
+            heart.addEventListener('click', () => {
+                heart.classList.toggle('active');
+                alert(heart.classList.contains('active') ? 'Added to Wishlist' : 'Removed from Wishlist');
             });
         });
     </script>
@@ -141,13 +186,62 @@
         }
 
         .saree-item img {
-            width: auto;
-            height: 100px;
-            max-width: 100%;
-            border-radius: 8px;
+            width: auto; /* Make image take full width of its container */
+            height: 100; /* Maintain aspect ratio */
+            max-height: 250px; /* Prevent images from getting too large */
             max-width: 100%; /* Ensures responsiveness */
-            object-fit: cover;
+            object-fit: cover; /* Prevents image distortion */
+            border-radius: 8px;
         }
+        .image-container {
+    position: relative;
+}
+
+.wishlist {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: 24px;
+    color: #bdbdbd;
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+}
+
+.wishlist.active {
+    color: red;
+}
+
+
+.color {
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.price-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px 0;
+}
+
+.final-price {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 18px;
+}
+
+.discount {
+    color: green;
+    font-weight: bold;
+}
 
         .add-to-cart {
             background-color: #ff4081;
@@ -162,7 +256,7 @@
         .add-to-cart:hover {
             background-color: #e91e63;
         }
-      @media (max-width: 768px) {
+        @media (max-width: 768px) {
     .saree-item img {
         max-height: 200px; /* Reduce height on smaller screens */
     }
