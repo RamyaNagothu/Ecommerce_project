@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Your Cart</title>
+    <title>Your Cart</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,122 +12,133 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="collections.html">Collections</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="about.html">Cart</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
 
     <h1>Your Shopping Cart</h1>
-    <h2>Items in Your Cart</h2>
     <div id="cart-container">
         <p>No items in cart.</p>
     </div>
 
     <button id="clear-cart">Clear Cart</button>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let cartContainer = document.getElementById('cart-container');
-    
-            function renderCart() {
-                if (cart.length === 0) {
-                    cartContainer.innerHTML = "<p>No items in cart.</p>";
-                } else {
-                    cartContainer.innerHTML = ""; // Clear the default message
-                    cart.forEach((item, index) => {
-                        let cartItem = document.createElement('div');
-                        cartItem.classList.add('cart-item');
-                        cartItem.innerHTML = `
-                            <img src="${item.image}" alt="${item.name}" width="100">
-                            <p><strong>${item.name}</strong></p>
-                            <p>${item.price}</p>
-                            <button class="remove-item" data-index="${index}">Remove</button>
-                        `;
-                        cartContainer.appendChild(cartItem);
-                    });
-    
-                    // Add event listeners to remove buttons
-                    document.querySelectorAll('.remove-item').forEach(button => {
-                        button.addEventListener('click', (event) => {
-                            let index = event.target.getAttribute('data-index');
-                            cart.splice(index, 1);
-                            localStorage.setItem('cart', JSON.stringify(cart));
-                            renderCart();
-                        });
-                    });
-                }
-            }
-    
-            // Render the cart initially
-            renderCart();
-    
-            document.getElementById('clear-cart').addEventListener('click', () => {
-                localStorage.removeItem('cart');
-                cart = []; // Reset the cart array
-                renderCart(); // Re-render the cart
-            });
+   <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartContainer = document.getElementById('cart-container');
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>No items in cart.</p>";
+    } else {
+
+        cartContainer.innerHTML = "";
+
+        cart.forEach(item => {
+
+            let cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+
+            cartItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}" class="cart-image">
+
+                <div class="cart-details">
+                    <h3>${item.name}</h3>
+                    <p>Price: ${item.price}</p>
+                </div>
+            `;
+
+            cartContainer.appendChild(cartItem);
         });
-    </script>
-    
+    }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            text-align: center;
-        }
+    document.getElementById('clear-cart').addEventListener('click', () => {
+        localStorage.removeItem('cart');
+        cartContainer.innerHTML = "<p>No items in cart.</p>";
+    });
 
-        nav {
-            background-color: #e91e63;
-            padding: 15px;
-        }
+});
+</script>
 
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    <link rel="stylesheet" href="styles.css">
+<style>
+     body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
 
-        nav ul li {
-            display: inline;
-            margin-right: 15px;
-        }
+    nav {
+        background-color: #ff9800;
+        padding: 15px;
+    }
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-        }
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+    }
 
-        #cart-container {
-            padding: 20px;
-        }
+    nav ul li {
+        display: inline;
+        margin-right: 15px;
+    }
 
-        .cart-item {
-            border: 1px solid #ddd;
-            padding: 15px;
-            background: #fff;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .cart-container{
+    width:90%;
+    margin:auto;
+}
 
-        #clear-cart {
-            background-color: #ff4081;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    background:white;
+    padding:15px;
+    margin:15px 0;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
 
-        #clear-cart:hover {
-            background-color: #e91e63;
-        }
-    </style>
+.cart-image{
+    width:120px;
+    height:150px;
+    object-fit:cover;
+    border-radius:8px;
+}
 
+.cart-details{
+    flex:1;
+}
+
+.cart-details h3{
+    margin:0;
+}
+
+.cart-details p{
+    margin-top:10px;
+    color:#555;
+}
+
+#clear-cart{
+    display:block;
+    margin:20px auto;
+    padding:10px 20px;
+    background:#ff4081;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+</style>
 </body>
 </html>
