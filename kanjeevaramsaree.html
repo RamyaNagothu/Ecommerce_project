@@ -11,76 +11,116 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="collections.html">Collections</a></li>
-            <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">Cart</a></li>
         </ul>
     </nav>
 
-    <h1>Our Exclusive Georgette Sarees Collection</h1>
-
+    <h1>Our Exclusive Kanjeevaram Sarees Collection</h1>
     <div class="saree-container">
-        <div class="saree-item">
-            <img src="images\kanjeevaramimg1.jpeg" alt="Kanjeevaram Saree 1">
+       <div class="saree-item">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
+                <img src="images/kanjeevaramimg1.jpeg" alt="Kanjeevaram Saree 1">
+            </div>
             <p><strong>Royal Red Kanjeevaram Saree</strong></p>
             <p>Handwoven red Kanjeevaram saree with gold zari work.</p>
-            <p>Price: ₹7,999</p>
+            <div class="price-section">
+                <span class="original-price">₹11,999</span>
+                <span class="final-price">₹7,999</span>
+                <span class="discount">33% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
-
         </div>
-
+        
         <div class="saree-item">
-            <img src="images\kanjeevaramimg2.jpeg" alt="Kanjeevaram Saree 2">
+        <div class="image-container">
+             <span class="wishlist">♥</span>
+            <img src="images/kanjeevaramimg2.jpeg" alt="Kanjeevaram Saree 2">
+            </div>
             <p><strong>Elegant Blue Kanjeevaram Saree</strong></p>
             <p>Beautiful blue Kanjeevaram silk saree with silver borders.</p>
-            <p>Price: ₹8,499</p>
+            <div class="price-section">
+            <span class="original-price">₹10,499</span>
+            <span class="final-price">₹8,499</span>
+            <span class="discount">33% OFF</span>
+            </div>
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
-            <img src="images\kanjeevaramimg3.jpeg" alt="Kanjeevaram Saree 3">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
+            <img src="images/kanjeevaramimg3.jpeg" alt="Kanjeevaram Saree 3">
+            </div>
             <p><strong>Pink Floral Kanjeevaram Saree</strong></p>
             <p>Traditional pink Kanjeevaram saree with floral motifs.</p>
-            <p>Price: ₹9,299</p>
+            <div class="price-section">
+            <span class="original-price">₹11,599</span>
+            <span class="final-price">₹9,299</span>
+            <span class="discount">20% OFF</span>
+            </div>
+        
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
-            <img src="images\kanjeevaramimg4.jpeg" alt="Kanjeevaram Saree 4">
+            <div class="image-container">
+                 <span class="wishlist">♥</span>
+            <img src="images/kanjeevaramimg4.jpeg" alt="Kanjeevaram Saree 4">
+            </div>
             <p><strong>Golden Kanjeevaram Saree</strong></p>
             <p>Luxury golden Kanjeevaram saree for special occasions.</p>
-            <p>Price: ₹10,199</p>
+           <div class="price-section">
+            <span class="original-price">₹12,999</span>
+            <span class="final-price">₹10,199</span>
+            <span class="discount">22% OFF</span>
+           </div>
+        
             <button class="add-to-cart">Add to Cart</button>
         </div>
 
         <div class="saree-item">
-            <img src="images\kanjeevaramimg5.jpeg" alt="Kanjeevaram Saree 5">
+            <div class="image-container">
+                <span class="wishlist">♥</span>
+                <img src="images/kanjeevaramimg5.jpeg" alt="Kanjeevaram Saree 5">
+            </div>
             <p><strong>Green Zari Kanjeevaram Saree</strong></p>
             <p>Rich green Kanjeevaram saree with heavy zari weaving.</p>
-            <p>Price: ₹11,499</p>
+            <div class="price-section">
+            <span class="original-price">₹14,299</span>
+            <span class="final-price">₹11,499</span>
+            <span class="discount">20% OFF</span>
+            </div>
+        
             <button class="add-to-cart">Add to Cart</button>
         </div>
     </div>
     <script>
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', (event) => {
-                let item = event.target.parentElement;
-                let itemName = item.querySelector('strong').innerText;
-                let itemPrice = item.querySelectorAll('p')[2].innerText; // Get price text
-                let itemImage = item.querySelector('img').src;
+                const item = event.target.closest('.saree-item');
+                const name = item.querySelector('strong').innerText;
+                const price = item.querySelector('.final-price').innerText;
+                const image = item.querySelector('img').src;
 
-                // Retrieve cart items from localStorage or initialize empty array
                 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-                // Add the selected item to the cart
-                cart.push({ name: itemName, price: itemPrice, image: itemImage });
-
-                // Store updated cart back to localStorage
+                cart.push({ name, price, image });
                 localStorage.setItem('cart', JSON.stringify(cart));
 
                 alert('Item added to cart!');
             });
         });
+
+        // Wishlist toggle
+        document.querySelectorAll('.wishlist').forEach(heart => {
+            heart.addEventListener('click', () => {
+                heart.classList.toggle('active');
+                alert(heart.classList.contains('active') ? 'Added to Wishlist' : 'Removed from Wishlist');
+            });
+        });
     </script>
+
 
 
 
@@ -117,55 +157,107 @@
     }
 
     .saree-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        padding: 20px;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
 
+.saree-item {
+    width: 41%;
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+ 
+.image-container {
+    position: relative;
+}
+
+.image-container img {
+    width: 30%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.wishlist {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: 24px;
+    color: #bdbdbd;
+    cursor: pointer;
+    background: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+}
+
+.wishlist.active {
+    color: red;
+}
+
+
+.color {
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.price-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px 0;
+}
+
+.final-price {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 18px;
+}
+
+.discount {
+    color: green;
+    font-weight: bold;
+}
+
+
+.add-to-cart {
+    width: 100%;
+    background: #ff4081;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-to-cart:hover {
+    background: #e91e63;
+}
+
+@media (max-width: 768px) {
     .saree-item {
-        width: 45%;
-        text-align: center;
-        border: 1px solid #ddd;
-        padding: 15px;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 90%;
     }
 
     .saree-item img {
-        width: auto;
-        height: 200px;
-        max-width: 100%;
-        border-radius: 8px;
-        object-fit: cover;
-        max-height: 250px;
+        width: 200px;
+        height: 280px;
     }
 
-    .add-to-cart {
-        background-color: #ff4081;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        margin-top: 10px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-    .add-to-cart:hover {
-        background-color: #e91e63;
-    }
-
-    @media (max-width: 768px) {
-        .saree-item {
-            width: 90%;
-        }
-    }
-    @media (max-width: 768px) {
-    .saree-item img {
-        max-height: 200px; /* Reduce height on smaller screens */
-    }
 }
 </style>
 </body>
